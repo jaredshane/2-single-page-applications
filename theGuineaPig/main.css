@@ -1,0 +1,28 @@
+.addBlue {
+  color: blue;
+}
+
+.makeBig {
+  font-size: 25px;
+}
+
+.borderIt {
+  border: 2px solid black;
+}
+
+.roundIt {
+  border-radius: 50%;
+}
+
+.boldIt {
+  font-weight: bold;
+}
+
+.boldAndItalicizeIt {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.blockIt {
+  display: block;
+}
