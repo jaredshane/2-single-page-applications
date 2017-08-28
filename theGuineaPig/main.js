@@ -37,7 +37,8 @@ document.getElementById('keypress-input').addEventListener('keyup', function (ev
 
 //When you click the "Add color" button, the guinea-pig element's text color should change to blue.
 
-addColor.addEventListener('click', function(event) {
+addColor.addEventListener('keypress', function(event) {
+  console.log(event)
   guineaPig.classList.toggle('addBlue');
 })
 
