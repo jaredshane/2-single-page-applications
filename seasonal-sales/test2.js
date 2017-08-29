@@ -73,29 +73,37 @@ function writeToDom (strang){
 var seasonalDeals = document.getElementById("seasonalDeals");
 
 function discountPrice (){
-	console.log(products);
-	for (var i = 0; i < products.length; i++) {
-    if (products[i].categorySeason === someVar) {
-      var totalPrice = products[i].price - (products[i].price * products[i].categoryDiscount)
-  		console.log(totalPrice.toFixed(2));
-      products[i].price = totalPrice.toFixed(2)
+  console.log('products', products)
+  console.log('newProducts', newProducts)
+	for (var i = 0; i < newProducts.length; i++) {
+    if (newProducts[i].categorySeason === someVar) {
+      var totalPrice = newProducts[i].price - (newProducts[i].price * newProducts[i].categoryDiscount)
+  		// console.log(totalPrice.toFixed(2));
+      newProducts[i].price = totalPrice.toFixed(2)
     }
 	}
   resetDom()
-  prodString(products)
+  prodString(newProducts)
 }
 
 seasonalDeals.addEventListener("change", function(event){
-	console.log(seasonalDeals.value);
-  var emptyData = '';
+  newProducts = JSON.parse(JSON.stringify(products))
+
+  console.log(products, newProducts)
 	if(seasonalDeals.value === "spring"){
+    console.log(products)
+    prodString(products)
+    resetDom()
     someVar = "Spring"
 		discountPrice()
-
 	} else if (seasonalDeals.value === "autumn") {
+    prodString(products)
+    resetDom()
     someVar = "Autumn"
     discountPrice()
-  } else {
+  } else if (seasonalDeals.value === "winter"){
+    prodString(products)
+    resetDom()
     someVar = "Winter"
     discountPrice()
   }
@@ -117,6 +125,7 @@ function executeThisCodeAfterFileLoads2(){
 function executeThisCodeAfterFileErrors(){
 	console.log("It Broke");
 }
+
 
 var myRequest = new XMLHttpRequest();
 myRequest.addEventListener('load', executeThisCodeAfterFileLoads);
