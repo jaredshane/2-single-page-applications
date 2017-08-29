@@ -1,84 +1,84 @@
-var products = [];
+var products = []
 var categories = []
-var someVar = "";
-var seasonalSales = document.getElementById("namesHere");
-var newProducts = [];
-var numOfXHRLoaded = 0;
+var someVar = ""
+var seasonalSales = document.getElementById("namesHere")
+var newProducts = []
+var numOfXHRLoaded = 0
 
 function decideDataType(dataFromArray){
-	var dataType = "products";
-	//console.log(dataFromArray);
-	//console.log(dataFromArray.categories);
-	for (var i = 0; i < dataFromArray.length; i++){
+	var dataType = "products"
+	//console.log(dataFromArray)
+	//console.log(dataFromArray.categories)
+	for (var i = 0  i < dataFromArray.length  i++){
 		//console.log(dataFromArray[i].season_discount)
 		if(dataFromArray[i].season_discount){
-			dataType = "categories";
+			dataType = "categories"
 		}
 	}
-	// console.log(dataType);
+	// console.log(dataType)
 	if(dataType === "products"){
-		products = dataFromArray;
+		products = dataFromArray
 	}else if(dataType === "categories"){
-		categories = dataFromArray;
-		// console.log("categories logging", categories);
+		categories = dataFromArray
+		// console.log("categories logging", categories)
 	}
 
-	numOfXHRLoaded ++;
+	numOfXHRLoaded ++
 	if(numOfXHRLoaded === 2){
-		moveOn();
+		moveOn()
 	}
 }
 
 function moveOn (){
-	console.log(products);
-	// console.log(categories);
-	addCategoryToProduct();
+	console.log(products)
+	// console.log(categories)
+	addCategoryToProduct()
 }
 
 function resetDom () {
-  seasonalSales.innerHTML = '';
+  seasonalSales.innerHTML = ''
 }
 
 function addCategoryToProduct(){
-	for (var i = 0; i < products.length; i++) {
-		for (var j = 0; j < categories.length; j++) {
+	for (var i = 0  i < products.length  i++) {
+		for (var j = 0  j < categories.length  j++) {
 			if (products[i]["category_id"] === categories[j].id){
-				products[i].categoryName = categories[j].name;
-				products[i].categorySeason = categories[j]["season_discount"];
-				products[i].categoryDiscount = categories[j].discount;
+				products[i].categoryName = categories[j].name
+				products[i].categorySeason = categories[j]["season_discount"]
+				products[i].categoryDiscount = categories[j].discount
 			}
 		}
 	}
-	prodString(products);
+	prodString(products)
 }
 
 //Products domString
 function prodString (prod){
   console.log("in prodString", prod)
-	var domString = '';
-	for (var i = 0; i < prod.length; i++){
-		domString += `<div id="prodCard">`;
-		domString +=	`<h4 class="department">${prod[i].categoryName}</h4>`;
-		domString +=	`<h4 class="name">${prod[i].name}</h4>`;
-		domString +=	`<h4 class="price">${prod[i].price}</h4>`;
-		domString += `</div>`;
+	var domString = ''
+	for (var i = 0  i < prod.length  i++){
+		domString += `<div id="prodCard">`
+		domString +=	`<h4 class="department">${prod[i].categoryName}</h4>`
+		domString +=	`<h4 class="name">${prod[i].name}</h4>`
+		domString +=	`<h4 class="price">${prod[i].price}</h4>`
+		domString += `</div>`
 	}
-	writeToDom(domString);
+	writeToDom(domString)
 }
 
 function writeToDom (strang){
-	seasonalSales.innerHTML += strang;
+	seasonalSales.innerHTML += strang
 }
 //defining selector for discounts
-var seasonalDeals = document.getElementById("seasonalDeals");
+var seasonalDeals = document.getElementById("seasonalDeals")
 
 function discountPrice (){
   console.log('products', products)
   console.log('newProducts', newProducts)
-	for (var i = 0; i < newProducts.length; i++) {
+	for (var i = 0  i < newProducts.length  i++) {
     if (newProducts[i].categorySeason === someVar) {
       var totalPrice = newProducts[i].price - (newProducts[i].price * newProducts[i].categoryDiscount)
-  		// console.log(totalPrice.toFixed(2));
+  		// console.log(totalPrice.toFixed(2))
       newProducts[i].price = totalPrice.toFixed(2)
     }
 	}
@@ -111,30 +111,30 @@ seasonalDeals.addEventListener("change", function(event){
 
 
 function executeThisCodeAfterFileLoads(){
-	// console.log("this", this.responseText);
-	var data = JSON.parse(this.responseText);
-	decideDataType(data.products);
+	// console.log("this", this.responseText) 
+	var data = JSON.parse(this.responseText)
+	decideDataType(data.products)
 }
 
 function executeThisCodeAfterFileLoads2(){
-	// console.log("this", this.responseText);
-	var data = JSON.parse(this.responseText);
-	decideDataType(data.categories);
+	// console.log("this", this.responseText)
+	var data = JSON.parse(this.responseText)
+	decideDataType(data.categories)
 }
 
 function executeThisCodeAfterFileErrors(){
-	console.log("It Broke");
+	console.log("It Broke")
 }
 
 
-var myRequest = new XMLHttpRequest();
-myRequest.addEventListener('load', executeThisCodeAfterFileLoads);
-myRequest.addEventListener('error', executeThisCodeAfterFileErrors);
-myRequest.open('GET', 'products.json');
-myRequest.send();
+var myRequest = new XMLHttpRequest()
+myRequest.addEventListener('load', executeThisCodeAfterFileLoads)
+myRequest.addEventListener('error', executeThisCodeAfterFileErrors)
+myRequest.open('GET', 'products.json')
+myRequest.send()
 
-var myRequest2 = new XMLHttpRequest();
-myRequest2.addEventListener('load', executeThisCodeAfterFileLoads2);
-myRequest2.addEventListener('error', executeThisCodeAfterFileErrors);
-myRequest2.open('GET', 'categories.json');
-myRequest2.send();
+var myRequest2 = new XMLHttpRequest()
+myRequest2.addEventListener('load', executeThisCodeAfterFileLoads2)
+myRequest2.addEventListener('error', executeThisCodeAfterFileErrors)
+myRequest2.open('GET', 'categories.json')
+myRequest2.send()
