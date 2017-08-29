@@ -1,8 +1,8 @@
 var products = [];
 var categories = []
-var someVar = ""
+var someVar = "";
 var seasonalSales = document.getElementById("namesHere");
-
+var newProducts = [];
 var numOfXHRLoaded = 0;
 
 function decideDataType(dataFromArray){
