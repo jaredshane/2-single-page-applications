@@ -53,13 +53,14 @@ function addCategoryToProduct(){
 }
 
 //Products domString
-function prodString (products){
+function prodString (prod){
+  console.log("in prodString", prod)
 	var domString = '';
-	for (var i = 0; i < products.length; i++){
+	for (var i = 0; i < prod.length; i++){
 		domString += `<div id="prodCard">`;
-		domString +=	`<h4 class="department">${products[i].categoryName}</h4>`;
-		domString +=	`<h4 class="name">${products[i].name}</h4>`;
-		domString +=	`<h4 class="price">${products[i].price}</h4>`;
+		domString +=	`<h4 class="department">${prod[i].categoryName}</h4>`;
+		domString +=	`<h4 class="name">${prod[i].name}</h4>`;
+		domString +=	`<h4 class="price">${prod[i].price}</h4>`;
 		domString += `</div>`;
 	}
 	writeToDom(domString);
