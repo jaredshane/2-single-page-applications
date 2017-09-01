@@ -9,7 +9,7 @@ var makeLarge = document.getElementById('make-large')
 var addBorder = document.getElementById('add-border')
 var addRounding = document.getElementById('add-rounding')
 var buttons = document.querySelectorAll('button')
-
+console.log(buttons)
 
 
 // When any section is clicked the output target text should be "You clicked on the {text of the section} section"
@@ -42,6 +42,7 @@ addColor.addEventListener('keypress', function(event) {
   guineaPig.classList.toggle('addBlue');
 })
 
+
 //When you click the "Hulkify" button, the guinea-pig element's font size should become much larger.
 
 makeLarge.addEventListener('click', function(event) {
@@ -67,6 +68,10 @@ section[0].classList.add('boldIt')
 section[5].classList.add('boldAndItalicizeIt');
 
 //Make the buttons stop appearing next to each other as inline elements. Change them into block elements.
-for (var i = 0; i < buttons.length; i++) {
-  buttons[i].classList.add('blockIt')
-}
+// for (var i = 0; i < buttons.length; i++) {
+//   buttons[i].classList.add('blockIt')
+// }
+
+buttons.forEach((button) => {
+  button.classList.add('blockIt')
+})
